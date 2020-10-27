@@ -1,0 +1,134 @@
+/*::-webkit-scrollbar {
+  width: 0.5em;
+  height: 0.5em;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #181F2E;
+  border-radius: 10px;
+}*/
+
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: #181f2e;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ffd740;
+  border-radius: 10px;
+  box-shadow: inset 1px 1px 5px #181f2e;
+}
+
+:host ::ng-deep .mat-expansion-panel-body,
+:host ::ng-deep .mat-expansion-panel-header {
+  padding: 0;
+}
+
+.mat-expansion-panel .mat-expansion-panel-header.cdk-keyboard-focused:not([aria-disabled='true']),
+.mat-expansion-panel .mat-expansion-panel-header.cdk-program-focused:not([aria-disabled='true']),
+.mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:hover:not([aria-disabled='true']) {
+  background: transparent;
+}
+
+.routes-form {
+  width: 340px;
+  max-height: 100vh;
+  box-sizing: border-box;
+  padding: 10px;
+  overflow-y: auto;
+
+  &__instruction {
+    margin: 0 auto;
+    text-align: center;
+    line-height: 1.4;
+    width: 75%;
+  }
+
+  .routes-list {
+    &__headers,
+    &__bodies {
+      margin-top: 10px;
+    }
+
+    &__headers,
+    &__bodies-item {
+      display: flex;
+      align-items: center;
+    }
+
+    &__bodies-item:not(:first-child) {
+      margin-top: 10px;
+    }
+
+    &__headers-title,
+    &__bodies-item-title {
+      width: 60%;
+    }
+
+    &__headers-height,
+    &__headers-time {
+      display: flex;
+      align-items: center;
+      .mat-icon {
+        margin-left: 3px;
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    &__bodies-item-title {
+      display: flex;
+      align-items: center;
+      &-text {
+        display: flex;
+        flex-direction: column;
+        padding-left: 10px;
+      }
+    }
+
+    &__headers-height,
+    &__bodies-item-height,
+    &__headers-time,
+    &__bodies-item-time {
+      width: 20%;
+    }
+
+    &__headers-height,
+    &__headers-time {
+      cursor: pointer;
+    }
+
+    &__buttons {
+      display: flex;
+      margin-top: 1rem;
+      & > .mat-stroked-button {
+        width: 50%;
+        .mat-button-wrapper {
+          display: flex;
+        }
+      }
+    }
+  }
+}
+
+.route-icon {
+  position: absolute;
+  right: 0;
+  bottom: 8px;
+  cursor: pointer;
+}
+
+.sts-icon {
+  position: absolute;
+  right: 15px;
+  bottom: 8px;
+}
+
+.full-width {
+  width: 100%;
+}

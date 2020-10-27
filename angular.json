@@ -25,9 +25,16 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/@monitorsoft/als-ui/src/assets/icons",
+                "output": "assets/als-icons"
+              }
+
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -92,6 +99,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -123,6 +131,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "aeromap-module"
+    }
+  },
+  "defaultProject": "aeromap-module",
+  "cli": {
+    "analytics": "bb1c177f-13c0-4391-826a-7c88043ce725"
+  }
 }

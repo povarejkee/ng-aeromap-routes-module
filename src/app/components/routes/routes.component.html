@@ -1,0 +1,166 @@
+<form class="routes-form" [formGroup]="form" (ngSubmit)="submit()">
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label class="als-font-group"> Вид полёта </mat-label>
+    <mat-select formControlName="flying" disableOptionCentering>
+      <mat-option *ngFor="let item of flyingList" [value]="item">
+        {{ item }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-expansion-panel togglePosition="before" [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Маршрут </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label class="als-font-group">Маршрут</mat-label>
+      <mat-icon *ngIf="route.value.trim()" svgIcon="maximize" class="route-icon"></mat-icon>
+      <input matInput #route />
+    </mat-form-field>
+
+    <div class="routes-list">
+      <div class="routes-list__headers">
+        <span class="routes-list__headers-title als-font-group">СПИСОК ТОЧЕК</span>
+        <div class="routes-list__headers-height als-font-group">
+          <span>ВЫС.</span>
+          <mat-icon svgIcon="arrow_down"></mat-icon>
+        </div>
+        <div class="routes-list__headers-time als-font-group">
+          <span>ЕТА</span>
+          <mat-icon svgIcon="arrow_down"></mat-icon>
+        </div>
+      </div>
+
+      <div class="routes-list__bodies">
+        <div class="routes-list__bodies-item" *ngFor="let item of routesList">
+          <div class="routes-list__bodies-item-title">
+            <div class="routes-list__bodies-item-title-icon">
+              <mat-icon svgIcon="civil"></mat-icon>
+            </div>
+            <div class="routes-list__bodies-item-title-text">
+              <span class="routes-list__bodies-item-title-text-arrival">
+                {{ item.ArrivialArpt }}
+              </span>
+              <span class="routes-list__bodies-item-title-text-hz als-font-group">
+                {{ item.hz }}
+              </span>
+            </div>
+          </div>
+          <span class="routes-list__bodies-item-height als-font-group">
+            {{ item.height }}
+          </span>
+          <span class="routes-list__bodies-item-time als-font-group">
+            {{ item.DepartureTime }}
+          </span>
+        </div>
+      </div>
+
+      <div class="routes-list__buttons">
+        <button mat-stroked-button color="primary">
+          <!--<mat-icon svgIcon="actions_arrows"></mat-icon>-->
+          <span>Направление</span>
+        </button>
+        <button mat-stroked-button color="primary">
+          <!--<mat-icon svgIcon="actions_delete"></mat-icon>-->
+          <span>Очистить</span>
+        </button>
+      </div>
+    </div>
+
+    <p *ngIf="routesList.length === 0" class="routes-form__instruction als-font-small-gray">
+      Для составления маршрута отметьте нужные точки на карте, либо введите название точки или её координаты в поле выше
+    </p>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel togglePosition="before" [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Параметры полёта </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label class="als-font-group">Дата и время прилёта</mat-label>
+      <input matInput [matDatepicker]="picker" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <div alsInputGroup class="full-width">
+      <mat-form-field appearance="outline">
+        <mat-label class="als-font-group"> Высота </mat-label>
+        <div class="d-flex justify-content-between">
+          <input matInput />
+          <als-unit-selector [options]="unitsHeight"></als-unit-selector>
+        </div>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label class="als-font-group"> Скорость </mat-label>
+        <div class="d-flex justify-content-between">
+          <input matInput />
+          <als-unit-selector [options]="unitsSpeed"></als-unit-selector>
+        </div>
+      </mat-form-field>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel togglePosition="before" [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Данные о ВС </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label class="als-font-group"> КВС </mat-label>
+      <mat-select disableOptionCentering>
+        <mat-option></mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label class="als-font-group"> Воздушное судно </mat-label>
+      <div class="d-flex justify-content-between">
+        <input matInput />
+        <als-unit-selector [options]="unitsAirship"></als-unit-selector>
+      </div>
+    </mat-form-field>
+
+    <button class="full-width" mat-stroked-button color="primary">Добавить ещё одно ВС</button>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel togglePosition="before" [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Дополнительно </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div alsInputGroup class="full-width">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label class="als-font-group"> Оп. индекс ВС </mat-label>
+        <mat-select disableOptionCentering>
+          <mat-option></mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label class="als-font-group"> Тип полёта </mat-label>
+        <mat-select disableOptionCentering>
+          <mat-option></mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label class="als-font-group"> Запасной аэродром </mat-label>
+      <mat-select disableOptionCentering>
+        <mat-option></mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label class="als-font-group"> STS/ </mat-label>
+      <mat-icon svgIcon="question-mark" class="sts-icon"></mat-icon>
+      <mat-select disableOptionCentering>
+        <mat-option></mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-expansion-panel>
+
+  <button type="submit" class="full-width" mat-flat-button color="primary">Сформировать план полёта</button>
+</form>

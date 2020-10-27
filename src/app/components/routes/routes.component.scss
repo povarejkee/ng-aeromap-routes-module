@@ -108,9 +108,6 @@
       margin-top: 1rem;
       & > .mat-stroked-button {
         width: 50%;
-        .mat-button-wrapper {
-          display: flex;
-        }
       }
     }
   }
@@ -131,4 +128,18 @@
 
 .full-width {
   width: 100%;
+}
+
+:host ::ng-deep .mat-button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .mat-icon {
+    margin-right: 8px;
+  }
+}
+
+:host ::ng-deep .mat-stroked-button {
+  padding: 0 8px !important;
 }

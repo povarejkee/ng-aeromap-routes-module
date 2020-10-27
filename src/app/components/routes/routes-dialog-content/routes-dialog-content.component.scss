@@ -1,0 +1,28 @@
+.routes-dialog-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__actions {
+    display: flex;
+    align-items: center;
+
+    &-fullscreen {
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    &-close {
+      cursor: pointer;
+      width: 12px;
+      height: 12px;
+    }
+  }
+}
+
+.routes-dialog-content {
+  &__textarea {
+    margin-top: 5px; // необходимо, тк отъезжающий label обрезается
+    width: 100%;
+  }
+}

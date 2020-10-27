@@ -1,6 +1,6 @@
 <form class="routes-form" [formGroup]="form" (ngSubmit)="submit()">
   <mat-form-field class="full-width" appearance="outline">
-    <mat-label class="als-font-group"> Вид полёта </mat-label>
+    <mat-label class="als-font-group">Вид полёта</mat-label>
     <mat-select formControlName="flying" disableOptionCentering>
       <mat-option *ngFor="let item of flyingList" [value]="item">
         {{ item }}
@@ -10,12 +10,13 @@
 
   <mat-expansion-panel togglePosition="before" [expanded]="true">
     <mat-expansion-panel-header>
-      <mat-panel-title> Маршрут </mat-panel-title>
+      <mat-panel-title>Маршрут</mat-panel-title>
     </mat-expansion-panel-header>
 
     <mat-form-field class="full-width" appearance="outline">
       <mat-label class="als-font-group">Маршрут</mat-label>
-      <mat-icon *ngIf="route.value.trim()" svgIcon="maximize" class="route-icon"></mat-icon>
+      <!-- *ngIf="route.value.trim()" todo добавить это в иконке ниже -->
+      <mat-icon svgIcon="maximize" class="route-icon" (click)="openDialog()"></mat-icon>
       <input matInput #route />
     </mat-form-field>
 
@@ -58,11 +59,11 @@
 
       <div class="routes-list__buttons">
         <button mat-stroked-button color="primary">
-          <!--<mat-icon svgIcon="actions_arrows"></mat-icon>-->
+          <mat-icon svgIcon="actions_arrows"></mat-icon>
           <span>Направление</span>
         </button>
         <button mat-stroked-button color="primary">
-          <!--<mat-icon svgIcon="actions_delete"></mat-icon>-->
+          <mat-icon svgIcon="actions_delete"></mat-icon>
           <span>Очистить</span>
         </button>
       </div>
@@ -75,7 +76,7 @@
 
   <mat-expansion-panel togglePosition="before" [expanded]="true">
     <mat-expansion-panel-header>
-      <mat-panel-title> Параметры полёта </mat-panel-title>
+      <mat-panel-title>Параметры полёта</mat-panel-title>
     </mat-expansion-panel-header>
 
     <mat-form-field class="full-width" appearance="outline">
@@ -87,14 +88,14 @@
 
     <div alsInputGroup class="full-width">
       <mat-form-field appearance="outline">
-        <mat-label class="als-font-group"> Высота </mat-label>
+        <mat-label class="als-font-group">Высота</mat-label>
         <div class="d-flex justify-content-between">
           <input matInput />
           <als-unit-selector [options]="unitsHeight"></als-unit-selector>
         </div>
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <mat-label class="als-font-group"> Скорость </mat-label>
+        <mat-label class="als-font-group">Скорость</mat-label>
         <div class="d-flex justify-content-between">
           <input matInput />
           <als-unit-selector [options]="unitsSpeed"></als-unit-selector>
@@ -105,7 +106,7 @@
 
   <mat-expansion-panel togglePosition="before" [expanded]="true">
     <mat-expansion-panel-header>
-      <mat-panel-title> Данные о ВС </mat-panel-title>
+      <mat-panel-title>Данные о ВС</mat-panel-title>
     </mat-expansion-panel-header>
 
     <mat-form-field class="full-width" appearance="outline">
@@ -116,7 +117,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label class="als-font-group"> Воздушное судно </mat-label>
+      <mat-label class="als-font-group">Воздушное судно</mat-label>
       <div class="d-flex justify-content-between">
         <input matInput />
         <als-unit-selector [options]="unitsAirship"></als-unit-selector>
@@ -128,7 +129,7 @@
 
   <mat-expansion-panel togglePosition="before" [expanded]="true">
     <mat-expansion-panel-header>
-      <mat-panel-title> Дополнительно </mat-panel-title>
+      <mat-panel-title>Дополнительно</mat-panel-title>
     </mat-expansion-panel-header>
 
     <div alsInputGroup class="full-width">
@@ -139,7 +140,7 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field class="full-width" appearance="outline">
-        <mat-label class="als-font-group"> Тип полёта </mat-label>
+        <mat-label class="als-font-group">Тип полёта</mat-label>
         <mat-select disableOptionCentering>
           <mat-option></mat-option>
         </mat-select>
@@ -147,14 +148,14 @@
     </div>
 
     <mat-form-field class="full-width" appearance="outline">
-      <mat-label class="als-font-group"> Запасной аэродром </mat-label>
+      <mat-label class="als-font-group">Запасной аэродром</mat-label>
       <mat-select disableOptionCentering>
         <mat-option></mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="outline">
-      <mat-label class="als-font-group"> STS/ </mat-label>
+      <mat-label class="als-font-group">STS/</mat-label>
       <mat-icon svgIcon="question-mark" class="sts-icon"></mat-icon>
       <mat-select disableOptionCentering>
         <mat-option></mat-option>

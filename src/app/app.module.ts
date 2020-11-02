@@ -4,7 +4,14 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RoutesComponent } from './components/routes/routes.component';
-import { AlsGridModule, AlsIconModule, AlsInputModule } from '@monitorsoft/als-ui';
+import {
+  AlsDividerGroupModule,
+  AlsDoubleSlideToggleModule,
+  AlsGridModule,
+  AlsIconModule,
+  AlsInputModule,
+  AlsSlideToggleModule,
+} from '@monitorsoft/als-ui';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -14,10 +21,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RoutesDialogContentComponent } from './components/routes/routes-dialog-content/routes-dialog-content.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { RoutesTableComponent } from './components/routes/routes-table/routes-table.component';
+import { RoutesDialogInfoComponent } from './components/routes/routes-dialog-info/routes-dialog-info.component';
 
 @NgModule({
-  declarations: [AppComponent, RoutesComponent, RoutesDialogContentComponent],
-  entryComponents: [RoutesDialogContentComponent],
+  declarations: [
+    AppComponent,
+    RoutesComponent,
+    RoutesDialogContentComponent,
+    RoutesTableComponent,
+    RoutesDialogInfoComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -32,6 +46,9 @@ import { MatMenuModule } from '@angular/material/menu';
     AlsIconModule,
     AlsGridModule,
     MatMenuModule,
+    AlsSlideToggleModule,
+    AlsDoubleSlideToggleModule,
+    AlsDividerGroupModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

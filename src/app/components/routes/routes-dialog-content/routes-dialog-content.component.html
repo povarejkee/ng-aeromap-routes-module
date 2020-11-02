@@ -1,7 +1,7 @@
 <section class="routes-dialog-title" mat-dialog-title>
   <span>Маршрут</span>
   <div class="routes-dialog-title__actions">
-    <mat-icon svgIcon="maximize" class="routes-dialog-title__actions-fullscreen"></mat-icon>
+    <mat-icon svgIcon="maximize" class="routes-dialog-title__actions-fullscreen" (click)="openDialog()"></mat-icon>
     <mat-icon svgIcon="close" class="routes-dialog-title__actions-close" mat-dialog-close></mat-icon>
   </div>
 </section>
@@ -12,4 +12,5 @@
       <textarea matInput></textarea>
     </label>
   </mat-form-field>
+  <app-routes-table></app-routes-table>
 </mat-dialog-content>

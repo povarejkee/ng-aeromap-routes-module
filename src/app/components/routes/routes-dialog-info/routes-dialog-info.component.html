@@ -1,0 +1,85 @@
+<mat-dialog-content>
+  <section class="flight-title">
+    <header class="flight-title__header">
+      <als-divider-group class="flight-title__header-divider">UUEE</als-divider-group>
+      <div class="flight-title__header-close">
+        <mat-icon svgIcon="close" mat-dialog-close></mat-icon>
+      </div>
+    </header>
+    <div class="full-width mt-4 d-flex justify-content-between">
+      <mat-form-field appearance="outline">
+        <mat-label class="als-font-group">Высота</mat-label>
+        <div class="d-flex justify-content-between">
+          <input matInput />
+          <als-unit-selector [options]="unitsHeight"></als-unit-selector>
+        </div>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label class="als-font-group">Скорость</mat-label>
+        <div class="d-flex justify-content-between">
+          <input matInput />
+          <als-unit-selector [options]="unitsSpeed"></als-unit-selector>
+        </div>
+      </mat-form-field>
+    </div>
+    <button class="full-width mt-4" mat-stroked-button color="warn">Удалить из маршрута</button>
+    <div
+      class="d-flex justify-content-between align-items-center mt-4 flight-title__checkbox"
+      (click)="toggleFake('fake1')"
+    >
+      <span>Обозначить посадку</span>
+      <mat-slide-toggle disabled [checked]="fake1"></mat-slide-toggle>
+    </div>
+    <div
+      class="d-flex justify-content-between align-items-center mt-4 flight-title__checkbox"
+      (click)="toggleFake('fake2')"
+    >
+      <span>Обозначить РАР</span>
+      <mat-slide-toggle disabled [checked]="fake2"></mat-slide-toggle>
+    </div>
+    <div
+      class="d-flex justify-content-between align-items-center mt-4 flight-title__checkbox"
+      (click)="toggleFake('fake3')"
+    >
+      <span>Обозначить задержку</span>
+      <mat-slide-toggle disabled [checked]="fake3"></mat-slide-toggle>
+    </div>
+    <div
+      class="d-flex justify-content-between align-items-center mt-4 flight-title__checkbox"
+      (click)="toggleFake('fake4')"
+    >
+      <span>Совершение маневра в точке</span>
+      <mat-slide-toggle disabled [checked]="fake4"></mat-slide-toggle>
+    </div>
+  </section>
+
+  <section class="flight-rules">
+    <als-divider-group>Правила полёта</als-divider-group>
+    <als-double-slide-toggle ngDefaultControl>
+      <span leftLabel>IFR</span>
+      <span rightLabel>VFR</span>
+    </als-double-slide-toggle>
+  </section>
+
+  <section class="flight-info">
+    <als-divider-group>Информация</als-divider-group>
+    <div class="flight-info__table">
+      <div class="flight-info__table-row d-flex justify-content-between align-items-center">
+        <span class="flight-info__table-row-label als-text-light-grey">ЕТА</span>
+        <span class="flight-info__table-row-title">14:30</span>
+      </div>
+      <div class="flight-info__table-row d-flex justify-content-between align-items-center">
+        <span class="flight-info__table-row-label als-text-light-grey">ЕЕТ</span>
+        <span class="flight-info__table-row-title">00:00</span>
+      </div>
+      <div class="flight-info__table-row d-flex justify-content-between align-items-center">
+        <span class="flight-info__table-row-label als-text-light-grey">Топливо</span>
+        <span class="flight-info__table-row-title">60</span>
+      </div>
+      <div class="flight-info__table-row d-flex justify-content-between align-items-center">
+        <span class="flight-info__table-row-label als-text-light-grey">Курс</span>
+        <span class="flight-info__table-row-title">54</span>
+      </div>
+    </div>
+  </section>
+</mat-dialog-content>

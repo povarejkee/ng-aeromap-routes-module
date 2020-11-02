@@ -1,0 +1,65 @@
+.full-width {
+  width: 100%;
+}
+
+/*als-double-slide-toggle > div {
+  justify-content: flex-start !important;
+}
+
+als-divider-group > div {
+  width: 90% !important;
+}*/
+
+.flight-title {
+  padding-top: 20px;
+  &__header {
+    position: relative;
+    &-close {
+      position: absolute;
+      top: 1px;
+      right: 0;
+      cursor: pointer;
+      background-color: #181f2e;
+      padding-left: 10px;
+      .mat-icon {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+
+  .mat-form-field {
+    width: 155px;
+    &:first-of-type {
+      margin-right: 10px;
+    }
+  }
+
+  &__checkbox {
+    cursor: pointer;
+    transition: opacity 0.2s;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
+
+.flight-rules {
+  padding-top: 20px;
+}
+
+.flight-info {
+  padding-top: 20px;
+  &__table {
+    &-row {
+      &:not(:first-child) {
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+:host ::ng-deep .mat-slide-toggle.mat-disabled {
+  opacity: 1;
+  pointer-events: none;
+}

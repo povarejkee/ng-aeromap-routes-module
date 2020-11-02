@@ -1,34 +1,3 @@
-/*::-webkit-scrollbar {
-  width: 0.5em;
-  height: 0.5em;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #181F2E;
-  border-radius: 10px;
-}*/
-
-::-webkit-scrollbar {
-  width: 6px;
-  background-color: #181f2e;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #ffd740;
-  border-radius: 10px;
-  box-shadow: inset 1px 1px 5px #181f2e;
-}
-
-:host ::ng-deep .mat-expansion-panel-body,
-:host ::ng-deep .mat-expansion-panel-header {
-  padding: 0;
-}
-
 .mat-expansion-panel .mat-expansion-panel-header.cdk-keyboard-focused:not([aria-disabled='true']),
 .mat-expansion-panel .mat-expansion-panel-header.cdk-program-focused:not([aria-disabled='true']),
 .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:hover:not([aria-disabled='true']) {
@@ -128,6 +97,11 @@
 
 .full-width {
   width: 100%;
+}
+
+:host ::ng-deep .mat-expansion-panel-body,
+:host ::ng-deep .mat-expansion-panel-header {
+  padding: 0;
 }
 
 :host ::ng-deep .mat-button-wrapper {

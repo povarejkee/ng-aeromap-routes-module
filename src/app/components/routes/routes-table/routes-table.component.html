@@ -1,0 +1,75 @@
+<als-grid [colDefs]="colDefs" [tableConfig]="tableConfig">
+  <!-- Кастомные шаблоны ячеек в хедере -->
+  <!--  <ng-template alsGridHeaderCellTemplate="lastName" let-col>
+    <a class="text-wrap">
+      <span>
+        {{ col.title }}
+      </span>
+    </a>
+  </ng-template>-->
+
+  <ng-template alsGridHeaderCellTemplate let-col>
+    <span>
+      {{ col.title }}
+    </span>
+  </ng-template>
+
+  <!-- Кастомные шаблоны ячеек -->
+  <!--  <ng-template alsGridCellTemplate="tel" let-cellData let-value="value" class="text-truncate">-->
+  <!--    <a>-->
+  <!--      {{ value }}-->
+  <!--    </a>-->
+  <!--  </ng-template>-->
+
+  <!--  <ng-template alsGridCellTemplate="firm" let-cellData let-col="col" let-value="value" class="text-truncate">-->
+  <!--    <i>-->
+  <!--      {{ value }}-->
+  <!--    </i>-->
+  <!--  </ng-template>-->
+
+  <ng-template alsGridCellTemplate="route" let-cellData let-col let-value="value">
+    <div class="route-cell">
+      <mat-icon [svgIcon]="value.iconName" class="route-cell__icon"></mat-icon>
+      <div class="route-cell__text">
+        <span>
+          {{ value.name }}
+        </span>
+        <br />
+        <span class="als-font-small-gray">
+          {{ value.type }}
+        </span>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template alsGridCellTemplate let-value="value" let-cellData let-col>
+    <span *ngIf="value !== 'incorrect'; else removeBtn">
+      {{ value }}
+    </span>
+
+    <ng-template #removeBtn>
+      <button color="warn" mat-icon-button mat-stroked-button>
+        <mat-icon [iconSize]="'12'" alsIcon svgIcon="delete"></mat-icon>
+      </button>
+    </ng-template>
+  </ng-template>
+
+  <!-- Кастомный шаблон настроек строк settings -->
+  <!--  <ng-template alsGridSettingsRowTemplate let-item>-->
+  <!--    <button [matMenuTriggerFor]="rowMenu" class="d-flex justify-content-center align-items-center" mat-icon-button>-->
+  <!--      <mat-icon svgIcon="menu"></mat-icon>-->
+  <!--    </button>-->
+
+  <!--    <mat-menu #rowMenu>-->
+  <!--      <button mat-menu-item>-->
+  <!--        <span>Перейти к заявлению</span>-->
+  <!--      </button>-->
+  <!--      <button disabled mat-menu-item>-->
+  <!--        <span>{{ item?.lastName }}</span>-->
+  <!--      </button>-->
+  <!--      <button mat-menu-item>-->
+  <!--        <span>Выбрать</span>-->
+  <!--      </button>-->
+  <!--    </mat-menu>-->
+  <!--  </ng-template>-->
+</als-grid>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { RoutesDialogContentComponent } from './routes-dialog-content/routes-dialog-content.component';
@@ -7,6 +7,7 @@ import { RoutesDialogContentComponent } from './routes-dialog-content/routes-dia
   selector: 'app-routes',
   templateUrl: './routes.component.html',
   styleUrls: ['./routes.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RoutesComponent implements OnInit {
   form: FormGroup;

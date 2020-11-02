@@ -86,7 +86,7 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <div alsInputGroup class="full-width">
+    <div alsInputGroup class="full-width mt-4">
       <mat-form-field appearance="outline">
         <mat-label class="als-font-group">Высота</mat-label>
         <div class="d-flex justify-content-between">
@@ -110,13 +110,13 @@
     </mat-expansion-panel-header>
 
     <mat-form-field class="full-width" appearance="outline">
-      <mat-label class="als-font-group"> КВС </mat-label>
+      <mat-label class="als-font-group">КВС</mat-label>
       <mat-select disableOptionCentering>
         <mat-option></mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
+    <mat-form-field appearance="outline" class="full-width mt-4">
       <mat-label class="als-font-group">Воздушное судно</mat-label>
       <div class="d-flex justify-content-between">
         <input matInput />
@@ -124,7 +124,7 @@
       </div>
     </mat-form-field>
 
-    <button class="full-width" mat-stroked-button color="primary">Добавить ещё одно ВС</button>
+    <button class="full-width mt-4" mat-stroked-button color="primary">Добавить ещё одно ВС</button>
   </mat-expansion-panel>
 
   <mat-expansion-panel togglePosition="before" [expanded]="true">
@@ -147,14 +147,14 @@
       </mat-form-field>
     </div>
 
-    <mat-form-field class="full-width" appearance="outline">
+    <mat-form-field class="full-width mt-4" appearance="outline">
       <mat-label class="als-font-group">Запасной аэродром</mat-label>
       <mat-select disableOptionCentering>
         <mat-option></mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field class="full-width" appearance="outline">
+    <mat-form-field class="full-width mt-4" appearance="outline">
       <mat-label class="als-font-group">STS/</mat-label>
       <mat-icon svgIcon="question-mark" class="sts-icon"></mat-icon>
       <mat-select disableOptionCentering>
@@ -163,5 +163,5 @@
     </mat-form-field>
   </mat-expansion-panel>
 
-  <button type="submit" class="full-width" mat-flat-button color="primary">Сформировать план полёта</button>
+  <button type="submit" class="full-width mt-4" mat-flat-button color="primary">Сформировать план полёта</button>
 </form>

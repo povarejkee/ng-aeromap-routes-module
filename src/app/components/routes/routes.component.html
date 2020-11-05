@@ -8,16 +8,31 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-expansion-panel togglePosition="before" [expanded]="true">
+  <mat-expansion-panel [style.overflow]="'unset'" togglePosition="before" [expanded]="true">
     <mat-expansion-panel-header>
       <mat-panel-title>Маршрут</mat-panel-title>
     </mat-expansion-panel-header>
 
-    <mat-form-field class="full-width" appearance="outline">
+    <div contenteditable="true" style="margin-bottom: 1rem">
+      <span>asd</span>
+      <span style="color: red"> lol</span>
+      <span> asza</span>
+    </div>
+
+    <mat-form-field class="full-width autocomplete" appearance="outline">
       <mat-label class="als-font-group">Маршрут</mat-label>
-      <!-- *ngIf="route.value.trim()" todo добавить это в иконке ниже -->
       <mat-icon svgIcon="maximize" class="route-icon" (click)="openDialog()"></mat-icon>
-      <input matInput #route />
+      <input matInput #inputRoute />
+
+      <section *ngIf="autocompleteItems$ | async as items" class="autocomplete__options">
+        <div *ngFor="let item of items" class="autocomplete__options-item d-flex align-items-center">
+          <mat-icon svgIcon="civil"></mat-icon>
+          <div class="autocomplete__options-item-text">
+            <span>{{ item }}</span>
+            <span class="als-font-small-gray mt-1">Шереметьево</span>
+          </div>
+        </div>
+      </section>
     </mat-form-field>
 
     <div class="routes-list">

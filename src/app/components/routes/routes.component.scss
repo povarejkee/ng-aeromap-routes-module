@@ -99,6 +99,42 @@
   width: 100%;
 }
 
+.autocomplete {
+  &__options {
+    position: absolute;
+    top: 115%;
+    left: -12px; // хардкод из-за лишних обёрток, за которыми не уследить
+    width: 288px; // хардкод из-за лишних обёрток, за которыми не уследить
+    max-height: calc(59px * 3); // todo временно
+    background-color: #2f3543;
+    border-radius: 5px;
+    z-index: 1;
+    overflow: auto;
+    &-item {
+      padding: 10px;
+      min-height: 50px;
+      cursor: pointer;
+      transition: background-color 0.1s;
+      &:first-of-type {
+        border-radius: 5px 5px 0 0;
+      }
+      &:last-of-type {
+        border-radius: 0 0 5px 5px;
+      }
+      &:hover {
+        background-color: #434955;
+      }
+      .mat-icon {
+        margin-right: 10px;
+      }
+      &-text {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
+
 :host ::ng-deep .mat-expansion-panel-body,
 :host ::ng-deep .mat-expansion-panel-header {
   padding: 0;

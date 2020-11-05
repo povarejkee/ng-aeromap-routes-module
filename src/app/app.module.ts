@@ -23,6 +23,9 @@ import { RoutesDialogContentComponent } from './components/routes/routes-dialog-
 import { MatMenuModule } from '@angular/material/menu';
 import { RoutesTableComponent } from './components/routes/routes-table/routes-table.component';
 import { RoutesDialogInfoComponent } from './components/routes/routes-dialog-info/routes-dialog-info.component';
+import { RoutesApi } from './services/api.service';
+import { RoutesFacade } from './routes-facade.service';
+import { RoutesState } from './services/state.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,7 @@ import { RoutesDialogInfoComponent } from './components/routes/routes-dialog-inf
     AlsDoubleSlideToggleModule,
     AlsDividerGroupModule,
   ],
-  providers: [],
+  providers: [RoutesApi, RoutesFacade, RoutesState],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -12,7 +12,7 @@
   overflow-y: auto;
 
   &__instruction {
-    margin: 0 auto;
+    margin: 10px auto 0;
     text-align: center;
     line-height: 1.4;
     width: 75%;
@@ -100,7 +100,10 @@
 }
 
 .autocomplete {
-  &__options {
+  .route-icon {
+    background-color: #181f2e;
+  }
+  /*&__options {
     position: absolute;
     top: 115%;
     left: -12px; // хардкод из-за лишних обёрток, за которыми не уследить
@@ -132,7 +135,7 @@
         flex-direction: column;
       }
     }
-  }
+  }*/
 }
 
 :host ::ng-deep .mat-expansion-panel-body,

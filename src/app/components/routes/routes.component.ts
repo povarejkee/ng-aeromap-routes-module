@@ -25,25 +25,16 @@ export class RoutesComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('inputRoute') private inputRef: ElementRef;
 
   form: FormGroup;
+  value: string;
   flyingList: string[] = ['Полёт воздушного судна'];
-  routesList: any[] = [
-    {
-      ArrivialArpt: 'UUEE', // todo отлёт или прибытие?
-      DepartureTime: '14:30', // todo уточнить
-      hz: 'Шереметьево', // todo такого ключа нет
-      height: 400, // todo  такого ключа нет
-    },
-    {
-      ArrivialArpt: 'UUEE',
-      DepartureTime: '21:45',
-      hz: 'Домодедово',
-      height: 600,
-    },
-  ];
   unitsHeight: string[] = ['м'];
   unitsSpeed: string[] = ['км/ч'];
   unitsAirship: string[] = ['VFR'];
   autocompleteItems$: Observable<any>;
+
+  /* <ПОКА БЕЗ СТЕЙТ-СЕРВИСА> */
+  chosenItems: string[] = [];
+  /* </ПОКА БЕЗ СТЕЙТ-СЕРВИСА> */
 
   private unsubscribe$: Subject<any> = new Subject<any>();
 
@@ -55,6 +46,7 @@ export class RoutesComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this.autocompleteItems$ = this.routesFacade.getAutocompleteItems();
+    this.value = this.routesFacade.getInputValue();
   }
 
   ngAfterViewInit(): void {
@@ -64,7 +56,8 @@ export class RoutesComponent implements OnInit, AfterViewInit, OnDestroy {
         pluck('target', 'value'),
         debounceTime(600),
         tap((str: string) => {
-          this.routesFacade.loadAutocompleteItems(str);
+          const requestStr = this.takeValueForAutocompleteRequest(str);
+          this.routesFacade.loadAutocompleteItems(requestStr);
         })
       )
       .subscribe();
@@ -90,4 +83,38 @@ export class RoutesComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   submit(): void {}
+
+  ///
+
+  takeValueForAutocompleteRequest(str: string): string {
+    const lastSpaceIdx = str.lastIndexOf(' ');
+
+    if (lastSpaceIdx !== -1) {
+      const value = str.slice(lastSpaceIdx).trim();
+      console.log(lastSpaceIdx, value);
+      return value;
+    } else {
+      return str;
+    }
+  }
+
+  chooseAutocompleteItem(item: string): void {
+    this.chosenItems.push(item);
+    this.value = this.chosenItems.join(' ') + ' ';
+    this.routesFacade.setAutocompleteItems(null);
+
+    console.log('Выбранные:', this.chosenItems);
+  }
+
+  onBlurHandler() {
+    console.log(this.value.trim().split(' '));
+
+    this.value = this.chosenItems.join(' ');
+  }
+
+  clear(): void {
+    this.value = '';
+    this.chosenItems = [];
+    this.routesFacade.setAutocompleteItems(null);
+  }
 }

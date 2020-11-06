@@ -13,7 +13,7 @@ import {
   AlsSlideToggleModule,
 } from '@monitorsoft/als-ui';
 import { MatSelectModule } from '@angular/material/select';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -26,6 +26,7 @@ import { RoutesDialogInfoComponent } from './components/routes/routes-dialog-inf
 import { RoutesApi } from './services/api.service';
 import { RoutesFacade } from './routes-facade.service';
 import { RoutesState } from './services/state.service';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,8 @@ import { RoutesState } from './services/state.service';
     AlsSlideToggleModule,
     AlsDoubleSlideToggleModule,
     AlsDividerGroupModule,
+    FormsModule,
+    MatAutocompleteModule,
   ],
   providers: [RoutesApi, RoutesFacade, RoutesState],
   bootstrap: [AppComponent],

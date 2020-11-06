@@ -20,4 +20,12 @@ export class RoutesFacade {
   getAutocompleteItems(): any {
     return this.routesState.getAutocompleteItems$();
   }
+
+  setAutocompleteItems(items: any): void {
+    this.routesState.setAutocompleteItems(items);
+  }
+
+  getInputValue(): string {
+    return this.routesState.inputValue;
+  }
 }

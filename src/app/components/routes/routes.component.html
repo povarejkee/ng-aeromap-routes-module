@@ -22,20 +22,28 @@
     <mat-form-field class="full-width autocomplete" appearance="outline">
       <mat-label class="als-font-group">Маршрут</mat-label>
       <mat-icon svgIcon="maximize" class="route-icon" (click)="openDialog()"></mat-icon>
-      <input matInput #inputRoute />
+      <input
+        matInput
+        #inputRoute
+        [(ngModel)]="value"
+        [ngModelOptions]="{ standalone: true }"
+        [matAutocomplete]="auto"
+        (blur)="onBlurHandler()"
+      />
 
-      <section *ngIf="autocompleteItems$ | async as items" class="autocomplete__options">
-        <div *ngFor="let item of items" class="autocomplete__options-item d-flex align-items-center">
-          <mat-icon svgIcon="civil"></mat-icon>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="chooseAutocompleteItem($event.option.value)">
+        <mat-option *ngFor="let item of autocompleteItems$ | async" [value]="item">
+          {{ item }}
+          <!--          <mat-icon svgIcon="civil"></mat-icon>
           <div class="autocomplete__options-item-text">
             <span>{{ item }}</span>
             <span class="als-font-small-gray mt-1">Шереметьево</span>
-          </div>
-        </div>
-      </section>
+          </div>-->
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
 
-    <div class="routes-list">
+    <div class="routes-list" *ngIf="chosenItems.length">
       <div class="routes-list__headers">
         <span class="routes-list__headers-title als-font-group">СПИСОК ТОЧЕК</span>
         <div class="routes-list__headers-height als-font-group">
@@ -49,26 +57,20 @@
       </div>
 
       <div class="routes-list__bodies">
-        <div class="routes-list__bodies-item" *ngFor="let item of routesList">
+        <div class="routes-list__bodies-item" *ngFor="let item of chosenItems">
           <div class="routes-list__bodies-item-title">
             <div class="routes-list__bodies-item-title-icon">
               <mat-icon svgIcon="civil"></mat-icon>
             </div>
             <div class="routes-list__bodies-item-title-text">
               <span class="routes-list__bodies-item-title-text-arrival">
-                {{ item.ArrivialArpt }}
+                {{ item }}
               </span>
-              <span class="routes-list__bodies-item-title-text-hz als-font-group">
-                {{ item.hz }}
-              </span>
+              <span class="routes-list__bodies-item-title-text-hz als-font-group"> tba </span>
             </div>
           </div>
-          <span class="routes-list__bodies-item-height als-font-group">
-            {{ item.height }}
-          </span>
-          <span class="routes-list__bodies-item-time als-font-group">
-            {{ item.DepartureTime }}
-          </span>
+          <span class="routes-list__bodies-item-height als-font-group"> tba </span>
+          <span class="routes-list__bodies-item-time als-font-group"> tba </span>
         </div>
       </div>
 
@@ -77,19 +79,19 @@
           <mat-icon svgIcon="actions_arrows"></mat-icon>
           <span>Направление</span>
         </button>
-        <button mat-stroked-button color="primary">
+        <button mat-stroked-button color="primary" (click)="clear()">
           <mat-icon svgIcon="actions_delete"></mat-icon>
           <span>Очистить</span>
         </button>
       </div>
     </div>
 
-    <p *ngIf="routesList.length === 0" class="routes-form__instruction als-font-small-gray">
+    <p *ngIf="chosenItems.length === 0" class="routes-form__instruction als-font-small-gray">
       Для составления маршрута отметьте нужные точки на карте, либо введите название точки или её координаты в поле выше
     </p>
   </mat-expansion-panel>
 
-  <mat-expansion-panel togglePosition="before" [expanded]="true">
+  <mat-expansion-panel togglePosition="before" [expanded]="false">
     <mat-expansion-panel-header>
       <mat-panel-title>Параметры полёта</mat-panel-title>
     </mat-expansion-panel-header>
@@ -119,7 +121,7 @@
     </div>
   </mat-expansion-panel>
 
-  <mat-expansion-panel togglePosition="before" [expanded]="true">
+  <mat-expansion-panel togglePosition="before" [expanded]="false">
     <mat-expansion-panel-header>
       <mat-panel-title>Данные о ВС</mat-panel-title>
     </mat-expansion-panel-header>
@@ -142,7 +144,7 @@
     <button class="full-width mt-4" mat-stroked-button color="primary">Добавить ещё одно ВС</button>
   </mat-expansion-panel>
 
-  <mat-expansion-panel togglePosition="before" [expanded]="true">
+  <mat-expansion-panel togglePosition="before" [expanded]="false">
     <mat-expansion-panel-header>
       <mat-panel-title>Дополнительно</mat-panel-title>
     </mat-expansion-panel-header>

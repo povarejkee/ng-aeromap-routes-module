@@ -12,7 +12,7 @@ export class RoutesFacade {
 
   loadAutocompleteItems(str: string): void {
     this.autocompleteItemsAPISub = this.routesApi.getAutocompleteItemsByStr(str).subscribe((response: any) => {
-      console.log(response);
+      console.warn('Ответ от автокомплита:', response);
       this.routesState.setAutocompleteItems(response);
     });
   }

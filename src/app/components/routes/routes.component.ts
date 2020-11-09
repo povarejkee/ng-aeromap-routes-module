@@ -43,6 +43,7 @@ export class RoutesComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.form = new FormGroup({
       flying: new FormControl(null),
+      contentEditable: new FormControl(null),
     });
 
     this.autocompleteItems$ = this.routesFacade.getAutocompleteItems();
@@ -50,14 +51,23 @@ export class RoutesComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    fromEvent(this.inputRef.nativeElement, 'keyup')
+    fromEvent(this.inputRef.nativeElement, 'input')
       .pipe(
         takeUntil(this.unsubscribe$),
-        pluck('target', 'value'),
+        pluck('target', 'textContent'),
         debounceTime(600),
         tap((str: string) => {
+          console.warn('Строка:', str);
+          console.warn('Массив из строки:', str.split(' '));
+
           const requestStr = this.takeValueForAutocompleteRequest(str);
           this.routesFacade.loadAutocompleteItems(requestStr);
+
+          console.warn('Строка для запроса:', requestStr);
+          console.warn(
+            'Сравнение итемов и строки при onchange:',
+            this.compareCurrentItemsWithString(this.chosenItems, str)
+          );
         })
       )
       .subscribe();
@@ -88,11 +98,10 @@ export class RoutesComponent implements OnInit, AfterViewInit, OnDestroy {
 
   takeValueForAutocompleteRequest(str: string): string {
     const lastSpaceIdx = str.lastIndexOf(' ');
+    console.log(lastSpaceIdx);
 
     if (lastSpaceIdx !== -1) {
-      const value = str.slice(lastSpaceIdx).trim();
-      console.log(lastSpaceIdx, value);
-      return value;
+      return str.slice(lastSpaceIdx).trim();
     } else {
       return str;
     }
@@ -100,21 +109,28 @@ export class RoutesComponent implements OnInit, AfterViewInit, OnDestroy {
 
   chooseAutocompleteItem(item: string): void {
     this.chosenItems.push(item);
-    this.value = this.chosenItems.join(' ') + ' ';
+    // this.value = this.chosenItems.join(' ') + ' ';
+    this.inputRef.nativeElement.textContent = this.chosenItems.join(' ') + ' ';
     this.routesFacade.setAutocompleteItems(null);
 
     console.log('Выбранные:', this.chosenItems);
-  }
-
-  onBlurHandler() {
-    console.log(this.value.trim().split(' '));
-
-    this.value = this.chosenItems.join(' ');
+    console.log(
+      'Сравнение итемов и строки после выбора :',
+      this.compareCurrentItemsWithString(this.chosenItems, this.inputRef.nativeElement.textContent)
+    );
   }
 
   clear(): void {
-    this.value = '';
+    this.inputRef.nativeElement.textContent = '';
     this.chosenItems = [];
     this.routesFacade.setAutocompleteItems(null);
+  }
+
+  compareCurrentItemsWithString(items, string) {
+    const stringsCollection: string[] = string.trim().split(' ');
+
+    // TODO для начала найдем индексы тех мест, которые не совпадают
+
+    return [items, stringsCollection];
   }
 }

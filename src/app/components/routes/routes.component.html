@@ -13,13 +13,29 @@
       <mat-panel-title>Маршрут</mat-panel-title>
     </mat-expansion-panel-header>
 
-    <div contenteditable="true" style="margin-bottom: 1rem">
-      <span>asd</span>
-      <span style="color: red"> lol</span>
-      <span> asza</span>
-    </div>
+    <section class="autocomplete">
+      <div class="content-editable">
+        <span class="content-editable-label" appLabelClickCrutch>Маршрут</span>
+        <div contenteditable="true" class="content-editable-input" appLabelBlurCrutch #inputRoute></div>
+        <mat-icon svgIcon="maximize" class="content-editable-icon" (click)="openDialog()"></mat-icon>
+      </div>
 
-    <mat-form-field class="full-width autocomplete" appearance="outline">
+      <div *ngIf="autocompleteItems$ | async as items" class="autocomplete__options">
+        <div
+          *ngFor="let item of items"
+          class="autocomplete__options-item d-flex align-items-center"
+          (click)="chooseAutocompleteItem(item)"
+        >
+          <mat-icon svgIcon="civil"></mat-icon>
+          <div class="autocomplete__options-item-text">
+            <span>{{ item }}</span>
+            <span class="als-font-small-gray mt-1">Шереметьево</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--<mat-form-field class="full-width autocomplete" appearance="outline">
       <mat-label class="als-font-group">Маршрут</mat-label>
       <mat-icon svgIcon="maximize" class="route-icon" (click)="openDialog()"></mat-icon>
       <input
@@ -27,21 +43,22 @@
         #inputRoute
         [(ngModel)]="value"
         [ngModelOptions]="{ standalone: true }"
-        [matAutocomplete]="auto"
-        (blur)="onBlurHandler()"
       />
 
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="chooseAutocompleteItem($event.option.value)">
-        <mat-option *ngFor="let item of autocompleteItems$ | async" [value]="item">
-          {{ item }}
-          <!--          <mat-icon svgIcon="civil"></mat-icon>
+      <section *ngIf="autocompleteItems$ | async as items" class="autocomplete__options">
+        <div
+          *ngFor="let item of items"
+          class="autocomplete__options-item d-flex align-items-center"
+          (click)="chooseAutocompleteItem(item)"
+        >
+          <mat-icon svgIcon="civil"></mat-icon>
           <div class="autocomplete__options-item-text">
             <span>{{ item }}</span>
             <span class="als-font-small-gray mt-1">Шереметьево</span>
-          </div>-->
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+          </div>
+        </div>
+      </section>
+    </mat-form-field>-->
 
     <div class="routes-list" *ngIf="chosenItems.length">
       <div class="routes-list__headers">

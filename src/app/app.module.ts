@@ -27,6 +27,8 @@ import { RoutesApi } from './services/api.service';
 import { RoutesFacade } from './routes-facade.service';
 import { RoutesState } from './services/state.service';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { LabelClickCrutchDirective } from './directives/label-click-crutch.directive';
+import { LabelBlurCrutchDirective } from './directives/label-blur-crutch.directive';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     RoutesDialogContentComponent,
     RoutesTableComponent,
     RoutesDialogInfoComponent,
+    LabelClickCrutchDirective,
+    LabelBlurCrutchDirective,
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,13 @@
   background: transparent;
 }
 
+@mixin focused-label-state() {
+  left: 4px;
+  top: -10px;
+  font-size: 9px;
+  padding: 0 3px;
+}
+
 .routes-form {
   width: 340px;
   max-height: 100vh;
@@ -100,14 +107,11 @@
 }
 
 .autocomplete {
-  .route-icon {
-    background-color: #181f2e;
-  }
-  /*&__options {
+  position: relative;
+  &__options {
     position: absolute;
-    top: 115%;
-    left: -12px; // хардкод из-за лишних обёрток, за которыми не уследить
-    width: 288px; // хардкод из-за лишних обёрток, за которыми не уследить
+    top: 49px;
+    width: 100%;
     max-height: calc(59px * 3); // todo временно
     background-color: #2f3543;
     border-radius: 5px;
@@ -135,7 +139,64 @@
         flex-direction: column;
       }
     }
-  }*/
+  }
+}
+
+.content-editable {
+  position: relative;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #303643;
+  margin-bottom: 1rem;
+  transition: border-color 0.3s;
+  padding-right: 2rem;
+  padding-left: 0.5rem;
+  outline: unset;
+
+  &:hover {
+    border-color: #464c58;
+  }
+
+  &:focus-within {
+    border-color: #cf9400;
+  }
+
+  &-label {
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    font-size: 11px;
+    background-color: #181f2e;
+    transition: top 0.3s, font-size 0.3s;
+    position: absolute;
+    top: 10px;
+  }
+
+  &:focus-within > &-label {
+    @include focused-label-state();
+  }
+
+  &-input {
+    width: 100%;
+    white-space: nowrap;
+    overflow-x: hidden;
+    &:focus {
+      outline: unset;
+    }
+  }
+
+  &-icon {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    cursor: pointer;
+    background-color: #181f2e;
+    padding-left: 5px;
+  }
+}
+
+.focused-label-state {
+  @include focused-label-state();
 }
 
 :host ::ng-deep .mat-expansion-panel-body,

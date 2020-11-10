@@ -16,7 +16,13 @@
     <section class="autocomplete">
       <div class="content-editable">
         <span class="content-editable-label" appLabelClickCrutch>Маршрут</span>
-        <div contenteditable="true" class="content-editable-input" appLabelBlurCrutch #inputRoute></div>
+        <div
+          contenteditable="true"
+          class="content-editable-input"
+          appLabelBlurCrutch
+          #inputRoute
+          (blur)="onBlurAutocomplete()"
+        ></div>
         <mat-icon svgIcon="maximize" class="content-editable-icon" (click)="openDialog()"></mat-icon>
       </div>
 

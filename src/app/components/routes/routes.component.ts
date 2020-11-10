@@ -34,6 +34,7 @@ export class RoutesComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /* <ПОКА БЕЗ СТЕЙТ-СЕРВИСА> */
   chosenItems: string[] = [];
+  changedIndex: number;
   /* </ПОКА БЕЗ СТЕЙТ-СЕРВИСА> */
 
   private unsubscribe$: Subject<any> = new Subject<any>();
@@ -57,17 +58,9 @@ export class RoutesComponent implements OnInit, AfterViewInit, OnDestroy {
         pluck('target', 'textContent'),
         debounceTime(600),
         tap((str: string) => {
-          console.warn('Строка:', str);
-          console.warn('Массив из строки:', str.split(' '));
+          const requestStr: string = this.findChangedItem(str) || this.takeValueForAutocompleteRequest(str);
 
-          const requestStr = this.takeValueForAutocompleteRequest(str);
-          this.routesFacade.loadAutocompleteItems(requestStr);
-
-          console.warn('Строка для запроса:', requestStr);
-          console.warn(
-            'Сравнение итемов и строки при onchange:',
-            this.compareCurrentItemsWithString(this.chosenItems, str)
-          );
+          this.routesFacade.loadAutocompleteItems(requestStr.toUpperCase());
         })
       )
       .subscribe();
@@ -82,9 +75,6 @@ export class RoutesComponent implements OnInit, AfterViewInit, OnDestroy {
     const dialogRef = this.dialog.open(RoutesDialogContentComponent, {
       minWidth: 1000,
       minHeight: 600,
-      // maxWidth: 1000,
-      // maxHeight: 600,
-      // panelClass: 'modal-dialog-l',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -94,43 +84,51 @@ export class RoutesComponent implements OnInit, AfterViewInit, OnDestroy {
 
   submit(): void {}
 
+  onBlurAutocomplete(): void {
+    console.log('BLURED!');
+  }
+
   ///
 
   takeValueForAutocompleteRequest(str: string): string {
     const lastSpaceIdx = str.lastIndexOf(' ');
-    console.log(lastSpaceIdx);
 
-    if (lastSpaceIdx !== -1) {
+    if (lastSpaceIdx > -1) {
       return str.slice(lastSpaceIdx).trim();
     } else {
       return str;
     }
   }
 
-  chooseAutocompleteItem(item: string): void {
-    this.chosenItems.push(item);
-    // this.value = this.chosenItems.join(' ') + ' ';
-    this.inputRef.nativeElement.textContent = this.chosenItems.join(' ') + ' ';
-    this.routesFacade.setAutocompleteItems(null);
+  findChangedItem(input: string): string {
+    const inputArray: string[] = input.trim().split(' ');
 
-    console.log('Выбранные:', this.chosenItems);
-    console.log(
-      'Сравнение итемов и строки после выбора :',
-      this.compareCurrentItemsWithString(this.chosenItems, this.inputRef.nativeElement.textContent)
-    );
+    // TODO найдем те места, которые не совпадают
+    for (let i = 0; i < this.chosenItems.length; i++) {
+      if (this.chosenItems[i] !== inputArray[i]) {
+        console.log('Найдено несоответствие по индексу', i);
+        this.changedIndex = i;
+
+        return inputArray[this.changedIndex];
+      }
+    }
+  }
+
+  chooseAutocompleteItem(item: string): void {
+    if (this.changedIndex === undefined) {
+      this.chosenItems.push(item);
+    } else {
+      this.chosenItems[this.changedIndex] = item;
+    }
+
+    this.inputRef.nativeElement.textContent = this.chosenItems.join(' ') + ' ';
+    this.changedIndex = undefined;
+    this.routesFacade.setAutocompleteItems(null);
   }
 
   clear(): void {
     this.inputRef.nativeElement.textContent = '';
     this.chosenItems = [];
     this.routesFacade.setAutocompleteItems(null);
-  }
-
-  compareCurrentItemsWithString(items, string) {
-    const stringsCollection: string[] = string.trim().split(' ');
-
-    // TODO для начала найдем индексы тех мест, которые не совпадают
-
-    return [items, stringsCollection];
   }
 }
